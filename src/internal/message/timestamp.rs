@@ -1,6 +1,8 @@
-mod timestamp {
+pub mod timestamp {
     use chrono::{DateTime, Datelike, Timelike, Utc};
+    use serde::{Serialize, Deserialize};
 
+    #[derive(Serialize, Deserialize, Debug)]
     struct Date {
         day: u32,
         month: u32,
@@ -12,7 +14,8 @@ mod timestamp {
             Self {day, month, year}
         }
     }
-
+    
+    #[derive(Serialize, Deserialize, Debug)]
     struct Hour {
         hour: u32,
         min: u32,
@@ -24,6 +27,7 @@ mod timestamp {
         }
     }
 
+    #[derive(Serialize, Deserialize, Debug)]
     pub struct Timestamp {
         date: Date,
         hour: Hour
