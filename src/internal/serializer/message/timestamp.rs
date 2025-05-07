@@ -41,5 +41,13 @@ pub mod timestamp {
                 hour: Hour::new(_now.hour(), _now.minute())
             }
         }
+
+        pub fn to_string(&self) -> String {
+            self.date.day.to_string().to_owned() + "-"
+            + self.date.month.to_string().as_str() + "-" 
+            + self.date.year.to_string().as_str() + " "
+            + self.hour.hour.to_string().as_str() + ":"
+            + self.hour.min.to_string().as_str()
+        }
     }
 }

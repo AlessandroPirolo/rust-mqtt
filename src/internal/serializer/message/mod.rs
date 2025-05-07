@@ -1,7 +1,7 @@
 mod timestamp;
 
 pub mod message { 
-    use crate::internal::message::timestamp::timestamp;
+    use crate::internal::serializer::message::timestamp::timestamp;
     use serde::{Serialize, Deserialize};
 
     #[derive(Serialize, Deserialize, Debug)]
@@ -24,8 +24,13 @@ pub mod message {
             serde_json::to_vec(&self).unwrap()
         }
 
-        pub fn parse_from(bytes: Vec<u8>) -> Message {
+        fn parse_from(bytes: Vec<u8>) -> Message {
             serde_json::from_slice(&bytes).unwrap()
+        }
+
+        pub fn stringify(payload: Vec<u8>) -> String {
+            let msg: Message = Self::parse_from(payload);
+            msg.time.to_string()
         }
     }
 }
