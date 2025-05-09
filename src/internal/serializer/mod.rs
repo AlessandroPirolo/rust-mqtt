@@ -1,7 +1,5 @@
-mod message;
-
 pub mod serializer {
-    use crate::internal::serializer::message::message::Message;
+    use crate::internal::message::message::Message;
 
     pub fn deserialize(payload: Vec<u8>) -> String {
         Message::stringify(payload)

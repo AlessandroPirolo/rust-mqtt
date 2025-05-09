@@ -1,7 +1,7 @@
 mod timestamp;
 
 pub mod message { 
-    use crate::internal::serializer::message::timestamp::timestamp;
+    use crate::internal::message::timestamp::timestamp;
     use serde::{Serialize, Deserialize};
 
     #[derive(Serialize, Deserialize, Debug)]
