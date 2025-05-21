@@ -12,15 +12,17 @@ pub mod ping {
     }
 
     impl Packet for Pingreq {
-        fn handle(&self) -> () {
-           // reset some timer associated with the client 
+        fn handle(&self) -> Option<impl Packet> {
+           // reset some timer associated with the client
+           Some(Pingresp::new())
         }
+        
         fn to_byte(&self) -> Vec<u8> {
-            Vec::new()
+            serde_json::to_vec(&self).unwrap()
         }
 
         fn parse_form(bytes: Vec<u8>) -> Self {
-            Self {}
+            serde_json::from_slice(&bytes).unwrap()
         }
     }
 
@@ -34,15 +36,16 @@ pub mod ping {
     }
 
     impl Packet for Pingresp {
-        fn handle(&self) -> () {
-            // nothing
+        fn handle(&self) -> Option<impl Packet> {
+            None::<Pingresp>
         }
+        
         fn to_byte(&self) -> Vec<u8> {
-            Vec::new()
+            serde_json::to_vec(&self).unwrap()
         }
 
         fn parse_form(bytes: Vec<u8>) -> Self {
-            Self {}
+            serde_json::from_slice(&bytes).unwrap()
         }
     }
 }

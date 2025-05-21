@@ -1,18 +1,24 @@
 mod topic;
 
 pub mod session {
+    use std::net::{IpAddr, TcpStream};
+
     use crate::broker::session::topic::topic::Topic;
 
-    #[derive(Debug, PartialEq)]
+    #[derive(Debug)]
     pub struct Session{
         // info about connection
-        subs: Vec<Topic>
+        subs: Vec<Topic>,
+        socket_addr: IpAddr,
+        conn_stream: TcpStream
     }
 
     impl Session {
-        pub fn new(subs: Vec<Topic>) -> Self {
+        pub fn new(subs: Vec<Topic>, addr: IpAddr, conn: TcpStream) -> Self {
             Self {
-                subs
+                subs,
+                socket_addr: addr,
+                conn_stream: conn
             }
         }
 

@@ -15,15 +15,16 @@ pub mod publish {
     }
 
     impl Packet for Publish {
-        fn handle(&self) -> () {
-            
+        fn handle(&self) -> Option<impl Packet> {
+            None::<Publish>
         }
+
         fn to_byte(&self) -> Vec<u8> {
-            Vec::new()
+            serde_json::to_vec(&self).unwrap()
         }
 
         fn parse_form(bytes: Vec<u8>) -> Self {
-            Self {}
+            serde_json::from_slice(&bytes).unwrap()
         }
     }
 
@@ -37,15 +38,16 @@ pub mod publish {
     }
 
     impl Packet for Puback {
-        fn handle(&self) -> () {
-            
+        fn handle(&self) -> Option<impl Packet> {
+            None::<Puback>
         }
+        
         fn to_byte(&self) -> Vec<u8> {
-            Vec::new()
+            serde_json::to_vec(&self).unwrap()
         }
 
         fn parse_form(bytes: Vec<u8>) -> Self {
-            Self {}
+            serde_json::from_slice(&bytes).unwrap()
         }
     }
 
@@ -59,15 +61,16 @@ pub mod publish {
     }
 
     impl Packet for Pubrec {
-        fn handle(&self) -> () {
-            
+        fn handle(&self) -> Option<impl Packet> {
+            None::<Pubrec>
         }
+        
         fn to_byte(&self) -> Vec<u8> {
-            Vec::new()
+            serde_json::to_vec(&self).unwrap()
         }
 
         fn parse_form(bytes: Vec<u8>) -> Self {
-            Self {}
+            serde_json::from_slice(&bytes).unwrap()
         }
     }
 
@@ -81,15 +84,16 @@ pub mod publish {
     }
 
     impl Packet for Pubrel {
-        fn handle(&self) -> () {
-            
+        fn handle(&self) -> Option<impl Packet> {
+            None::<Pubrel>
         }
+        
         fn to_byte(&self) -> Vec<u8> {
-            Vec::new()
+            serde_json::to_vec(&self).unwrap()
         }
 
         fn parse_form(bytes: Vec<u8>) -> Self {
-            Self {}
+            serde_json::from_slice(&bytes).unwrap()
         }
     }
 
@@ -103,15 +107,16 @@ pub mod publish {
     }
 
     impl Packet for Pubcomp {
-        fn handle(&self) -> () {
-            
+        fn handle(&self) -> Option<impl Packet> {
+            None::<Pubcomp>
         }
+        
         fn to_byte(&self) -> Vec<u8> {
-            Vec::new()
+            serde_json::to_vec(&self).unwrap()
         }
 
         fn parse_form(bytes: Vec<u8>) -> Self {
-            Self {}
+            serde_json::from_slice(&bytes).unwrap()
         }
     }
 } 

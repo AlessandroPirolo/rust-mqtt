@@ -15,16 +15,18 @@ pub mod subscribe {
     }
 
     impl Packet for Subscribe {
-        fn handle(&self) -> () {
+        fn handle(&self) -> Option<impl Packet> {
             // add to the vec of sub of the 
             // corresponding entry the new topic
+            Some(Suback::new())
         }
+        
         fn to_byte(&self) -> Vec<u8> {
-            Vec::new()
+            serde_json::to_vec(&self).unwrap()
         }
 
         fn parse_form(bytes: Vec<u8>) -> Self {
-            Self {}
+            serde_json::from_slice(&bytes).unwrap()
         }
     }
 
@@ -38,15 +40,16 @@ pub mod subscribe {
     }
 
     impl Packet for Suback {
-        fn handle(&self) -> () {
-            //nothing
+        fn handle(&self) -> Option<impl Packet> {
+            None::<Suback>
         }
+        
         fn to_byte(&self) -> Vec<u8> {
-            Vec::new()
+            serde_json::to_vec(&self).unwrap()
         }
 
         fn parse_form(bytes: Vec<u8>) -> Self {
-            Self {}
+            serde_json::from_slice(&bytes).unwrap()
         }
     }
 
@@ -63,16 +66,18 @@ pub mod subscribe {
     }
 
     impl Packet for Unsubscribe {
-        fn handle(&self) -> () {
+        fn handle(&self) -> Option<impl Packet> {
             // remove the topic from the corresponding
             // entry's vector of sub
+            Some(Unsuback::new())
         }
+        
         fn to_byte(&self) -> Vec<u8> {
-            Vec::new()
+            serde_json::to_vec(&self).unwrap()
         }
 
         fn parse_form(bytes: Vec<u8>) -> Self {
-            Self {}
+            serde_json::from_slice(&bytes).unwrap()
         }
     }
 
@@ -86,15 +91,16 @@ pub mod subscribe {
     }
 
     impl Packet for Unsuback {
-        fn handle(&self) -> () {
-            // nothing
+        fn handle(&self) -> Option<impl Packet> {
+            None::<Unsuback>
         }
+        
         fn to_byte(&self) -> Vec<u8> {
-            Vec::new()
+            serde_json::to_vec(&self).unwrap()
         }
 
         fn parse_form(bytes: Vec<u8>) -> Self {
-            Self {}
+            serde_json::from_slice(&bytes).unwrap()
         }
     }
 }
